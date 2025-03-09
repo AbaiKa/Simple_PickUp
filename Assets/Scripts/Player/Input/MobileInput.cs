@@ -7,6 +7,7 @@ namespace SPUPlayer
         [SerializeField] private Joystick joystickComponent;
         [SerializeField] private RectTransform joystickRect;
         [SerializeField] private float lookSensitivity = 0.1f;
+        [SerializeField] private float interactionDistance = 3;
 
         private int lookFingerId = -1;
         private int moveFingerId = -1;
@@ -18,17 +19,21 @@ namespace SPUPlayer
 
             if (Input.touchCount > 0)
             {
-                HandleInteraction();
+                // Проверяем, что это первое касание (клик), а не свайп
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    HandleInteraction();
+                }
             }
         }
+
         protected override void HandleInteraction()
         {
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            touchPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+            Vector2 touchPos = Input.GetTouch(0).position;
+            Ray ray = Camera.main.ScreenPointToRay(touchPos);
+            RaycastHit hit;
 
-            RaycastHit2D hit = Physics2D.Raycast(touchPos, Vector2.zero, 0f, interactionMask);
-
-            if (hit.collider != null)
+            if (Physics.Raycast(ray, out hit, interactionDistance, interactionMask))
             {
                 if (hit.collider.TryGetComponent(out ItemComponent item))
                 {
@@ -36,6 +41,7 @@ namespace SPUPlayer
                 }
             }
         }
+
         protected override void HandleLook()
         {
             foreach (Touch touch in Input.touches)
