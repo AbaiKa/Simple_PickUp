@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+namespace SPUPlayer
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Player : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private AInput inputComponent;
+        [SerializeField] private PlayerMovement movementComponent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            Init();
+        }
+        public void Init()
+        {
+            inputComponent.onMove.AddListener(movementComponent.Move);
+            inputComponent.onLook.AddListener(movementComponent.Look);
+        }
     }
 }

@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class AInput : MonoBehaviour
+namespace SPUPlayer
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class AInput : MonoBehaviour
     {
-        
-    }
+        [SerializeField] protected LayerMask interactionMask;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public UnityEvent<Vector2> onMove = new UnityEvent<Vector2>();
+        public UnityEvent<Vector2> onLook = new UnityEvent<Vector2>();
+        public UnityEvent<ItemComponent> onInteraction = new UnityEvent<ItemComponent>();
+
+        protected abstract void HandleMovement();
+        protected abstract void HandleLook();
+        protected abstract void HandleInteraction();
     }
 }
