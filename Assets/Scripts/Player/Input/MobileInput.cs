@@ -19,7 +19,6 @@ namespace SPUPlayer
 
             if (Input.touchCount > 0)
             {
-                // Проверяем, что это первое касание (клик), а не свайп
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
                     HandleInteraction();

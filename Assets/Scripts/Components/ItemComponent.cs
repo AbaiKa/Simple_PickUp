@@ -12,12 +12,6 @@ public class ItemComponent : MonoBehaviour
         transform.SetParent(baseParent);
         rigidbodyComponent.isKinematic = false;
     }
-    public void DeInit()
-    {
-        transform.SetParent(baseParent);
-        transform.localPosition = Vector3.zero;
-        rigidbodyComponent.isKinematic = false;
-    }
     public void PickUp(Transform newParent)
     {
         colliderComponent.isTrigger = true;

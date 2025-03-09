@@ -21,6 +21,10 @@ namespace SPUPlayer
             item.PickUp(handRoot);
             onPickUp?.Invoke(item);
         }
+        public void DeInit()
+        {
+            item = null;
+        }
         public void OnDrop()
         {
             item = null;

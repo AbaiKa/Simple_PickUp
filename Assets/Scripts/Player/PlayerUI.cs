@@ -17,6 +17,11 @@ namespace SPUPlayer
         {
             throwButton.onClick.AddListener(OnThrowButton);
         }
+        public void DeInit()
+        {
+            titleText.gameObject.SetActive(false);
+            throwButton.gameObject.SetActive(false);
+        }
         public void OnItemPickUp(ItemComponent item)
         {
             this.item = item;

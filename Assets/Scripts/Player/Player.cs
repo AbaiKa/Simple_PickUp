@@ -9,10 +9,6 @@ namespace SPUPlayer
         [SerializeField] private PlayerPickUp pickupComponent;
         [SerializeField] private PlayerUI uiComponent;
 
-        private void Start()
-        {
-            Init();
-        }
         public void Init()
         {
             uiComponent.Init();
@@ -23,6 +19,11 @@ namespace SPUPlayer
             inputComponent.onInteraction.AddListener(pickupComponent.PickUp);
             pickupComponent.onPickUp.AddListener(uiComponent.OnItemPickUp);
             uiComponent.onDrop.AddListener(pickupComponent.OnDrop);
+        }
+        public void Restart()
+        {
+            uiComponent.DeInit();
+            pickupComponent.DeInit();
         }
     }
 }
